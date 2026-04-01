@@ -493,12 +493,16 @@ function checkBrickCollisions() {
 
 /** Premakne ploščo */
 function movePaddle() {
-  if (mouse.x !== null) {
+  // Če pritisneš tipke → ignoriraj miško
+  if (keys.left || keys.right) {
+    if (keys.left)  paddle.x -= paddle.speed;
+    if (keys.right) paddle.x += paddle.speed;
+  } else if (mouse.x !== null) {
+    // Miška samo če ni tipk
     paddle.x = mouse.x - paddle.w / 2;
   }
-  if (keys.left)  paddle.x -= paddle.speed;
-  if (keys.right) paddle.x += paddle.speed;
 
+  // Omejitev na robove
   paddle.x = Math.max(0, Math.min(W - paddle.w, paddle.x));
 }
 
