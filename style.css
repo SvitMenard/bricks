@@ -1,0 +1,334 @@
+/* =========================================================
+   The Bricks – style.css
+   Zaobljeni, moderni videz za šolsko igro Breakout
+   ========================================================= */
+
+/* ----- Reset & osnova ----- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0d0d1a;
+  color: #e0e0f0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ----- Zasloni (meni, igra, navodila) ----- */
+.screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 760px;
+  padding: 20px 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.screen.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ----- Naslov igre (meni) ----- */
+.game-title {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #f9c74f, #f3722c, #f94144);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: #888;
+  font-size: 1rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* ----- NAPIS NAD OKNOM IGRE ----- */
+#gameHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(135deg, #1a1a35, #2a1a4a);
+  border: 2px solid #3a2a6a;
+  border-radius: 16px;
+  padding: 10px 32px;
+  box-shadow: 0 0 24px rgba(130, 60, 255, 0.25);
+  width: 100%;
+  max-width: 700px;
+  justify-content: center;
+}
+
+.game-header-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #f9c74f, #f3722c, #f94144);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.game-header-icon {
+  font-size: 1.4rem;
+  animation: sway 2s ease-in-out infinite alternate;
+}
+
+.game-header-icon:last-child {
+  animation-delay: 1s;
+}
+
+@keyframes sway {
+  from { transform: rotate(-8deg) scale(1); }
+  to   { transform: rotate(8deg)  scale(1.15); }
+}
+
+/* ----- Menijska sekcija (izbira težavnosti) ----- */
+.menu-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+}
+
+.menu-section label {
+  color: #aaa;
+}
+
+select {
+  background: #1e1e30;
+  color: #e0e0f0;
+  border: 2px solid #444;
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+select:focus {
+  border-color: #f9c74f;
+}
+
+/* ----- Prikaz najboljšega rezultata v meniju ----- */
+.best-score-display {
+  background: #1a1a2e;
+  border: 2px solid #2a2a50;
+  border-radius: 16px;
+  padding: 10px 28px;
+  font-size: 1.1rem;
+  color: #f9c74f;
+}
+
+/* ----- Gumbi ----- */
+.btn {
+  border: none;
+  border-radius: 14px;
+  padding: 12px 36px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+  letter-spacing: 0.5px;
+  min-width: 160px;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #f9c74f, #f3722c);
+  color: #0d0d1a;
+}
+
+.btn-secondary {
+  background: #1e1e35;
+  color: #c0c0e0;
+  border: 2px solid #3a3a60;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #f94144, #c1121f);
+  color: #fff;
+}
+
+/* ----- Navodila ----- */
+.instructions-list {
+  list-style: none;
+  background: #1a1a2e;
+  border: 2px solid #2a2a50;
+  border-radius: 18px;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 460px;
+  width: 100%;
+}
+
+.instructions-list li {
+  font-size: 0.97rem;
+  color: #ccc;
+  line-height: 1.5;
+}
+
+/* ----- HUD (podatki med igro) ----- */
+#hud {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hud-item {
+  background: #1a1a2e;
+  border: 2px solid #2a2a50;
+  border-radius: 12px;
+  padding: 5px 16px;
+  font-size: 0.92rem;
+  color: #d0d0f0;
+  font-weight: 600;
+}
+
+/* ----- Platno (canvas) ----- */
+#gameCanvas {
+  border-radius: 18px;
+  border: 3px solid #2a2a55;
+  background: #11112a;
+  box-shadow: 0 0 40px rgba(100, 80, 255, 0.2);
+  display: block;
+  max-width: 100%;
+}
+
+/* ----- Kontrolni gumbi med igro ----- */
+#gameControls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#gameControls .btn {
+  padding: 9px 24px;
+  font-size: 0.9rem;
+  min-width: 120px;
+}
+
+/* ----- Overlay (pavza, konec igre, prehod nivoja) ----- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  animation: fadeIn 0.2s ease;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay-box {
+  background: #1a1a2e;
+  border: 2px solid #3a3a70;
+  border-radius: 22px;
+  padding: 40px 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 280px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+}
+
+.overlay-box h2 {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+}
+
+.overlay-box p {
+  font-size: 1rem;
+  color: #bbb;
+}
+
+.overlay-box strong {
+  color: #f9c74f;
+}
+
+/* ----- Prehod med nivoji ----- */
+.bonus-msg {
+  color: #f9c74f !important;
+  font-weight: 700;
+  font-size: 1rem !important;
+}
+
+.next-level-msg {
+  color: #90e0ef !important;
+  font-style: italic;
+}
+
+/* ----- Nov najboljši rezultat ----- */
+.new-best {
+  color: #f9c74f;
+  font-weight: 700;
+  font-size: 1.1rem;
+  animation: pulse 0.6s infinite alternate;
+}
+
+.new-best.hidden {
+  display: none;
+}
+
+@keyframes pulse {
+  from { opacity: 0.7; transform: scale(1); }
+  to   { opacity: 1;   transform: scale(1.05); }
+}
+
+/* ----- Odzivnost za manjše zaslone ----- */
+@media (max-width: 740px) {
+  #gameCanvas {
+    width: 100%;
+    height: auto;
+  }
+
+  .game-title {
+    font-size: 2.2rem;
+  }
+
+  .overlay-box {
+    padding: 28px 24px;
+    min-width: 240px;
+  }
+
+  .game-header-title {
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+  }
+}

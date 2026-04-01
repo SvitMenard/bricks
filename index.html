@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Bricks</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== GLAVNI ZASLON ===== -->
+  <div id="mainMenu" class="screen active">
+    <h1 class="game-title">🧱 The Bricks</h1>
+    <p class="subtitle">Breakout igra</p>
+
+    <div class="menu-section">
+      <label for="difficultySelect">Težavnost:</label>
+      <select id="difficultySelect">
+        <option value="easy">Lahka</option>
+        <option value="medium" selected>Srednja</option>
+        <option value="hard">Težka</option>
+      </select>
+    </div>
+
+    <div class="best-score-display">
+      🏆 Najboljši rezultat: <span id="menuBestScore">0</span>
+    </div>
+
+    <button id="btnStart" class="btn btn-primary">▶ Začni igro</button>
+    <button id="btnInstructions" class="btn btn-secondary">📖 Navodila</button>
+  </div>
+
+  <!-- ===== NAVODILA ===== -->
+  <div id="instructionsScreen" class="screen">
+    <h2>Navodila</h2>
+    <ul class="instructions-list">
+      <li>🖱️ Premikaj miško ali tipki <strong>← →</strong> za premik plošče</li>
+      <li>💥 Razbijaš opeke z žogico</li>
+      <li>⭐ Zlate opeke dajo bonus točke</li>
+      <li>❤️ Rdeče opeke potrebujejo 2 udarca</li>
+      <li>⏸️ Tipka <strong>P</strong> ali gumb za pavzo</li>
+      <li>🏆 Rezultat se shrani samodejno</li>
+      <li>📈 Vsak nivo ima drugačno postavitev in je hitrejši</li>
+      <li>🗺️ Skupaj je 5 nivojev z unikatnimi vzorci</li>
+    </ul>
+    <button id="btnBackMenu" class="btn btn-secondary">← Nazaj</button>
+  </div>
+
+  <!-- ===== IGRA ===== -->
+  <div id="gameScreen" class="screen">
+
+    <!-- Napis nad oknom igre -->
+    <div id="gameHeader">
+      <span class="game-header-icon">🧱</span>
+      <span class="game-header-title">THE BRICKS</span>
+      <span class="game-header-icon">🧱</span>
+    </div>
+
+    <!-- HUD – info med igro -->
+    <div id="hud">
+      <div class="hud-item">🎯 Točke: <span id="hudScore">0</span></div>
+      <div class="hud-item">⏱️ Čas: <span id="hudTime">0:00</span></div>
+      <div class="hud-item">🌟 Nivo: <span id="hudLevel">1</span></div>
+      <div class="hud-item">🏆 Najboljši: <span id="hudBest">0</span></div>
+    </div>
+
+    <!-- Platno za igro -->
+    <canvas id="gameCanvas" width="700" height="500"></canvas>
+
+    <!-- Kontrolni gumbi med igro -->
+    <div id="gameControls">
+      <button id="btnPause" class="btn btn-secondary">⏸ Pavza</button>
+      <button id="btnRestart" class="btn btn-secondary">🔄 Znova</button>
+      <button id="btnMenu" class="btn btn-danger">🏠 Meni</button>
+    </div>
+  </div>
+
+  <!-- ===== PAVZA ===== -->
+  <div id="pauseOverlay" class="overlay hidden">
+    <div class="overlay-box">
+      <h2>⏸ Pavza</h2>
+      <button id="btnResume" class="btn btn-primary">▶ Nadaljuj</button>
+      <button id="btnRestartPause" class="btn btn-secondary">🔄 Znova</button>
+      <button id="btnMenuPause" class="btn btn-danger">🏠 Meni</button>
+    </div>
+  </div>
+
+  <!-- ===== PREHOD MED NIVOJI ===== -->
+  <div id="levelOverlay" class="overlay hidden">
+    <div class="overlay-box">
+      <h2 id="levelTitle">🌟 Nivo 1 končan!</h2>
+      <p>Točke: <strong id="levelScore">0</strong></p>
+      <p id="levelBonusMsg" class="bonus-msg"></p>
+      <p class="next-level-msg">Pripravite se na nivo <strong id="nextLevelNum">2</strong>…</p>
+      <button id="btnNextLevel" class="btn btn-primary">▶ Naslednji nivo</button>
+    </div>
+  </div>
+
+  <!-- ===== KONEC IGRE ===== -->
+  <div id="gameOverOverlay" class="overlay hidden">
+    <div class="overlay-box">
+      <h2 id="gameOverTitle">💀 Konec igre</h2>
+      <p>Točke: <strong id="finalScore">0</strong></p>
+      <p>Čas: <strong id="finalTime">0:00</strong></p>
+      <p>Nivo: <strong id="finalLevel">1</strong></p>
+      <p id="newBestMsg" class="new-best hidden">🎉 Nov najboljši rezultat!</p>
+      <button id="btnPlayAgain" class="btn btn-primary">▶ Igraj znova</button>
+      <button id="btnMenuOver" class="btn btn-danger">🏠 Meni</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
