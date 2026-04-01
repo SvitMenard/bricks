@@ -187,7 +187,7 @@ let paddle = {};
 let bricks = [];
 
 // Vhod
-let mouse = { x: W / 2 };
+let mouse = { x: null };
 let keys  = { left: false, right: false };
 
 // ─── POMOŽNE FUNKCIJE ─────────────────────────────────────
@@ -493,16 +493,20 @@ function checkBrickCollisions() {
 
 /** Premakne ploščo */
 function movePaddle() {
-  // Če pritisneš tipke → ignoriraj miško
-  if (keys.left || keys.right) {
-    if (keys.left)  paddle.x -= paddle.speed;
-    if (keys.right) paddle.x += paddle.speed;
-  } else if (mouse.x !== null) {
-    // Miška samo če ni tipk
+  if (keys.left) {
+    paddle.x -= paddle.speed;
+    mouse.x = null;
+  }
+
+  if (keys.right) {
+    paddle.x += paddle.speed;
+    mouse.x = null;
+  }
+
+  if (!keys.left && !keys.right && mouse.x !== null) {
     paddle.x = mouse.x - paddle.w / 2;
   }
 
-  // Omejitev na robove
   paddle.x = Math.max(0, Math.min(W - paddle.w, paddle.x));
 }
 
@@ -759,14 +763,31 @@ document.getElementById("btnMenuOver")
 // ─── TIPKOVNICA ───────────────────────────────────────────
 
 document.addEventListener("keydown", e => {
-  if (e.key === "ArrowLeft"  || e.key === "a") keys.left  = true;
-  if (e.key === "ArrowRight" || e.key === "d") keys.right = true;
-  if (e.key === "p" || e.key === "P" || e.key === "Escape") togglePause();
+  if (e.key === "ArrowLeft" || e.key === "ArrowRight" || e.key === " ") {
+    e.preventDefault();
+  }
+
+  if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") {
+    keys.left = true;
+  }
+
+  if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") {
+    keys.right = true;
+  }
+
+  if (e.key === "p" || e.key === "P" || e.key === "Escape") {
+    togglePause();
+  }
 });
 
 document.addEventListener("keyup", e => {
-  if (e.key === "ArrowLeft"  || e.key === "a") keys.left  = false;
-  if (e.key === "ArrowRight" || e.key === "d") keys.right = false;
+  if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") {
+    keys.left = false;
+  }
+
+  if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") {
+    keys.right = false;
+  }
 });
 
 // ─── MIŠKA & DOTIK ────────────────────────────────────────
